@@ -4,7 +4,9 @@ let urlCharacters = "https://dattebayo-api.onrender.com/characters";
 let btnNext;
 let btnPrevious;
 let templateHtml;
-console.log("<--  -->")
+let currentPage = 1;
+const itemsPerPage = 8;
+let allCharacters = []; 
 
 const getCharacters= async(url) =>{
     try {
@@ -12,6 +14,8 @@ const getCharacters= async(url) =>{
     const results = await response.json();
     console.log(results)
     dataCharacters(results.characters)
+    allCharacters = results.characters
+    showPage(currentPage)
 }catch (error) {
         console.log(error)
     }
@@ -63,3 +67,36 @@ const dataCharacters = (characters) =>{
     }
 }
 
+const pageButtons = () => {
+    const totalPages = Math.ceil(allCharacters.length / itemsPerPage);
+    buttons.innerHTML = `
+    <div class="buttons">
+      <button ${currentPage === 1 ? "disabled" : ""} id="prev">Previous</button>
+      <span> Page ${currentPage} of ${totalPages} </span>
+      <button ${currentPage === totalPages ? "disabled" : ""} id="next">Next</button>
+    </div>
+      `;
+  
+    document.getElementById("prev").addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        showPage(currentPage);
+      }
+    });
+  
+    document.getElementById("next").addEventListener("click", () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        showPage(currentPage);
+      }
+    });
+  };
+  const showPage = (page) => {
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const charactersToShow = allCharacters.slice(startIndex, endIndex);
+    
+    dataCharacters(charactersToShow); 
+    pageButtons();
+  };
+    
