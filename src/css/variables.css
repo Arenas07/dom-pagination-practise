@@ -27,12 +27,13 @@ body {
 .list__characters {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     gap: 2rem;
     padding: 0 5rem;
-    width: 100%;
-    max-width: 90%;
+    width: 1400px;
+    padding: 0 30px
+
 }
 
 .character__container {
@@ -41,7 +42,8 @@ body {
     background-color: white;
     justify-content: center;
     gap: 20px;
-    width: 300px;
+    padding-left: unset;
+    width: 270px;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
