@@ -1,11 +1,8 @@
 const lists__characters = document.getElementById("list__characters");
-const buttons = document.getElementById("buttons");
 let urlCharacters = "https://dattebayo-api.onrender.com/characters";
-let btnNext;
-let btnPrevious;
 let templateHtml;
 let currentPage = 1;
-const itemsPerPage = 8;
+const itemsPerPage = 4;
 let allCharacters = []; 
 
 const getCharacters= async(url) =>{
